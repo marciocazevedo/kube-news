@@ -4,31 +4,9 @@ pipeline{
         stage("Build Docker Image"){
             steps{
                 script {
-                    dockerapp = docker.build("marciocazevedo/kube-news:${env.BUILD_ID}", '-f ./src/Dockerfile ./src')
+                    dockerapp = docker.build("marciocazevedo/kube-news:v${env.BUILD_ID}", '-f ./src/Dockerfile ./src')
                 }
             }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
-        }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
